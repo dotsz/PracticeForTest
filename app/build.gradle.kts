@@ -63,6 +63,8 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.google.protobuf.kotlin.lite)
     implementation(libs.annotation)
+    implementation(libs.androidx.material.extended)
+
 
     testImplementation(libs.junit)
 

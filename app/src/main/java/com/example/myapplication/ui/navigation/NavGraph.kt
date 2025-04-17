@@ -24,28 +24,42 @@ fun NavGraph(
     ) {
 
         composable(Screen.UserListScreen.route) {
+
+
             UserListScreen(
                 userViewModel = userViewModel,
-                onNavigateToAdd = {
-                    navController.navigate(Screen.AddUserScreen.route)
-                 })
+                onUserClick = { userId ->
+                    navController.navigate(Screen.UserDetailScreen.createRoute(userId))
+                },
+                onDeleteUser = { userId ->
+                    userViewModel.deleteUser(userId)
+                },
+            )
         }
 
         composable(
             route = Screen.UserDetailScreen.route,
-            arguments = listOf(navArgument("userId") { type = NavType.IntType }))
-        { backStackEntry ->
+            arguments = listOf(navArgument("userId") { type = NavType.IntType })
+        ) { backStackEntry ->
             val userId = backStackEntry.arguments?.getInt("userId")
-            if(userId != null) {
+            if (userId != null) {
                 UserDetailScreen(
                     userId = userId,
-                    userViewModel = userViewModel
+                    userViewModel = userViewModel,
+                    onDismiss = {
+                        navController.popBackStack()
+                    }
                 )
             }
         }
 
         composable(route = Screen.AddUserScreen.route) {
-            AddUserScreen(userViewModel = userViewModel)
+            AddUserScreen(
+                userViewModel = userViewModel,
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 

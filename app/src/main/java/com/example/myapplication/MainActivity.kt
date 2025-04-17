@@ -60,7 +60,8 @@ class MainActivity : ComponentActivity() {
                     },
                     floatingActionButton = {
                         if (routeName == Screen.UserListScreen.route) {
-                            FloatingActionButton(onClick = {
+                            FloatingActionButton(
+                                onClick = {
                                 navController.navigate(Screen.AddUserScreen.route)
                             }) {
                                 Icon(Icons.Default.Add, contentDescription = "Add User")

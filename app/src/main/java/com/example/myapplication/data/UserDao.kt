@@ -29,7 +29,7 @@ interface UserDao {
 
     @Query
     ("SELECT * FROM users WHERE role = :role")
-    suspend fun getUserByRole(role: String): List<User>?
+    suspend fun getUserByRole(role: String): List<User>
 
     @Insert
     suspend fun insertUser(user: User)

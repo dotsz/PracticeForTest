@@ -36,10 +36,14 @@ class UserViewModel(
         }
     }
 
-    fun deleteUser(user: User) {
+    fun deleteUser(userId: Int) {
         viewModelScope.launch {
-            userDao.deleteUser(user)
-            loadUsers() // Refresh the list after deleting
+            val user = userList.find { it.id == userId }
+            if (user != null) {
+                userDao.deleteUser(user)
+                loadUsers() // Refresh the list after deleting
+            }
+
         }
     }
 
