@@ -8,15 +8,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.myapplication.ui.screen.AddUserScreen
+import com.example.myapplication.ui.screen.SettingsScreen
 import com.example.myapplication.ui.screen.UserDetailScreen
 import com.example.myapplication.ui.screen.UserListScreen
 import com.example.myapplication.ui.viewmodel.UserViewModel
+import com.example.myapplication.viewmodel.AppSettingsViewModel
 
 @Composable
 fun NavGraph(
     modifier: Modifier,
-    navController : NavHostController,
-    userViewModel: UserViewModel
+    navController: NavHostController,
+    userViewModel: UserViewModel,
+    settingsViewModel: AppSettingsViewModel,
+    isDarkTheme: Boolean,
 ) {
     NavHost(
         navController = navController,
@@ -44,23 +48,29 @@ fun NavGraph(
             val userId = backStackEntry.arguments?.getInt("userId")
             if (userId != null) {
                 UserDetailScreen(
-                    userId = userId,
-                    userViewModel = userViewModel,
-                    onDismiss = {
+                    userId = userId, userViewModel = userViewModel, onDismiss = {
                         navController.popBackStack()
-                    }
-                )
+                    })
             }
         }
 
         composable(route = Screen.AddUserScreen.route) {
             AddUserScreen(
-                userViewModel = userViewModel,
-                onBack = {
+                userViewModel = userViewModel, onBack = {
                     navController.popBackStack()
-                }
-            )
+                })
         }
+
+        composable(
+            route = Screen.SettingsScreen.route
+        ) {
+            SettingsScreen(
+                onBack = { navController.popBackStack() },
+                isDarkTheme = isDarkTheme,
+                onToggleDarkMode = { settingsViewModel.toggleDarkTheme() }
+        )
     }
+
+}
 
 }

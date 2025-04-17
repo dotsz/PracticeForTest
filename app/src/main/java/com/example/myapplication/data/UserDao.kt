@@ -32,7 +32,7 @@ interface UserDao {
     suspend fun getUserByRole(role: String): List<User>
 
     @Insert
-    suspend fun insertUser(user: User)
+    suspend fun insertUser(user: User) : Long
 
     @Update
     suspend fun updateUser(user: User)

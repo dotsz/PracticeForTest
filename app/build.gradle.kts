@@ -64,6 +64,8 @@ dependencies {
     implementation(libs.google.protobuf.kotlin.lite)
     implementation(libs.annotation)
     implementation(libs.androidx.material.extended)
+    implementation(libs.androidx.datastore)
+    implementation(libs.androidx.datastore.core)
 
 
     testImplementation(libs.junit)
@@ -76,9 +78,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     ksp(libs.androidx.room.compiler)
-
-
-
+    testImplementation(kotlin("test"))
 
 
 }
