@@ -17,7 +17,8 @@ import com.example.myapplication.ui.viewmodel.UserViewModel
 
 @Composable
 fun UserListScreen(
-    userViewModel: UserViewModel
+    userViewModel: UserViewModel,
+    onNavigateToAdd: () -> Unit
 ) {
 
     // Observe the users LiveData from the ViewModel
@@ -41,9 +42,11 @@ fun UserListScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(8.dp)
-                        .testTag("userCard"), onClick = {
+                        .testTag("userCard"),
+                    onClick = {
                         // pass in a lambda to handle the click event
-                    }) {
+                    }
+                ) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()

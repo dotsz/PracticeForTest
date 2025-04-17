@@ -2,6 +2,7 @@ package com.example.myapplication.ui.viewmodel
 
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.User
 import com.example.myapplication.data.UserDao
@@ -42,6 +43,17 @@ class UserViewModel(
         }
     }
 
+}
 
-
+class UserViewModelFactory(
+    private val userDao: UserDao
+) : ViewModelProvider.Factory {
+    override fun <T: ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return UserViewModel(userDao) as T
+        } else {
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
 }
